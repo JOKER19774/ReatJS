@@ -1,15 +1,46 @@
-h2{
-    color: aquamarine;
+.encabezado {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
 }
 
-h1{
-    color: brown;
+/* LOGO */
+.logo img {
+    width: 60px;
 }
 
-.Encabezado{
-    background-color: blue;
+/* MENU */
+.menu {
+    flex: 1;
 }
 
-.logo img{
-    width: 100px;
+.menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.menu a:hover {
+    color: gold;
+}
+
+/* REDES */
+.redes {
+    display: flex;
+    gap: 10px;
+}
+
+.redes img {
+    width: 20px;
+    cursor: pointer;
 }

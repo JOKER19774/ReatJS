@@ -59,15 +59,12 @@ function FeedComponent() {
     <>
       <p>Lista de materiales de construcción</p>
       <ul>
-        {materiales.map(function(material, index){
-          return(
-            <li key={index}>{material.name}</li>
-          )
-        })
-
-        }
+        {materiales.map((item, index) => (
+          <li key={index}>{item.material}</li>
+        ))}
       </ul>
-      </>
-    ) 
-  }
+    </>
+  ) 
+}
+
           export default App

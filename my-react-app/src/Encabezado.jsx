@@ -6,18 +6,17 @@ import "./Encabezado.css";
 
 function Encabezado() {
     return (
-        <div>
+        <header className="encabezado">
             <Logo />
             <Menu />
             <Redes />
-            <h2>Bienvenidos a mi sitio</h2>
-        </div>
+        </header>
     );
 }
 
 function Logo() {
     return (
-        <div>
+        <div className="logo">
             <img src={logo} alt="Logo del sitio" />
         </div>
     );
@@ -25,7 +24,7 @@ function Logo() {
 
 function Menu() {
     return (
-        <nav>
+        <nav className="menu">
             <ul>
                 <li><a href="#">Inicio</a></li>
                 <li><a href="#">Acerca de</a></li>
@@ -39,15 +38,12 @@ function Menu() {
 
 function Redes() {
     return (
-        <nav>
-            <ul>
-                <li><img src={youtube} alt="YouTube" /></li>
-                <li><img src={facebook} alt="Facebook" /></li>
-                <li><img src={instagram} alt="Instagram" /></li>
-            </ul>
-        </nav>
+        <div className="redes">
+            <img src={youtube} alt="YouTube" />
+            <img src={facebook} alt="Facebook" />
+            <img src={instagram} alt="Instagram" />
+        </div>
     );
 }
-
 
 export default Encabezado;
