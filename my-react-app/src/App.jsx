@@ -53,21 +53,21 @@ function FeedComponent() {
     { id: 2, material: 'arena' },
     { id: 3, material: 'pala' },
     { id: 4, material: 'martillo' },
-  ];
+  ]
 
   return (
-    <div>
+    <>
       <p>Lista de materiales de construcción</p>
       <ul>
-        {materiales.map((item) => (
-          <li key={item.id}>
-            {item.material} es un material
-          </li>
-        ))}
+        {materiales.map(function(material, index){
+          return(
+            <li key={index}>{material.name}</li>
+          )
+        })
+
+        }
       </ul>
-    </div>
-  );
-}
-
-
-export default App
+      </>
+    ) 
+  }
+          export default App

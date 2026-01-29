@@ -1,8 +1,15 @@
 h2{
+    color: aquamarine;
 }
+
 h1{
-    color: pink
+    color: brown;
 }
+
 .Encabezado{
-    background-color: aqua;
+    background-color: blue;
+}
+
+.logo img{
+    width: 100px;
 }

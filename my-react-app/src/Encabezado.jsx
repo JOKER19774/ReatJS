@@ -1,7 +1,8 @@
-import logo from "./assets/kenny 2.jpg";
-import youtube from "./assets/redes/youtube.png";
-import facebook from "./assets/redes/facebook.png";
-import instagram from "./assets/redes/instagram.png";
+import logo from "./assets/kenny_2.jpg";
+import youtube from "./assets/youtube.png";
+import facebook from "./assets/facebook.png";
+import instagram from "./assets/instagram.png";
+import "./Encabezado.css";
 
 function Encabezado() {
     return (
@@ -16,7 +17,7 @@ function Encabezado() {
 
 function Logo() {
     return (
-        <div className="Logo">
+        <div>
             <img src={logo} alt="Logo del sitio" />
         </div>
     );
@@ -47,5 +48,6 @@ function Redes() {
         </nav>
     );
 }
+
 
 export default Encabezado;
