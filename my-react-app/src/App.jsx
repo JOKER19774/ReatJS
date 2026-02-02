@@ -1,13 +1,15 @@
+import ContenedorTarjeta from "./ContenedorTarjeta";
 import Encabezado from "./Encabezado";
 
 function App() {
   return (
     <div>
       <Encabezado />
+      <ContenedorTarjeta />
       <h1>EVND</h1>
       <h2>Profesor</h2>
       <h3>M.T.I. Ricardo Luna Santos</h3>
-
+      
       <UserComponent />
       <ProfileComponent />
       <FeedComponent />
@@ -23,15 +25,15 @@ function UserComponent(){
   return <h1>User Component {nombrecompleto}</h1>
 }
 
-function ProfileComponent(){
-
+function ProfileComponent() {
+  
   const users = [
     { id: 1, name: 'Diego', role: 'Web Developer' },
     { id: 2, name: 'Andrea', role: 'Web Designer' },
     { id: 3, name: 'Pao', role: 'Team Leader' },
   ]
 
-  return (
+      return (
     <>
       <p>Lista de usuarios del sistema</p>
       <ul>
@@ -59,12 +61,12 @@ function FeedComponent() {
     <>
       <p>Lista de materiales de construcción</p>
       <ul>
-        {materiales.map((item, index) => (
-          <li key={index}>{item.material}</li>
+        {materiales.map(item => (
+          <li key={item.id}>{item.material}</li>
         ))}
       </ul>
     </>
   ) 
 }
 
-          export default App
+export default App;
