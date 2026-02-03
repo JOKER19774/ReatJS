@@ -1,0 +1,40 @@
+.contenedor-tarjeta {
+  background-color: red;
+  width: 90%;
+  height: 300px;
+  margin: 40px auto;
+  border-radius: 15px;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.tarjeta {
+  background-color: white;
+  width: 22%;
+  height: 220px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.tarjeta img {
+  width: 80%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.tarjeta p {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}

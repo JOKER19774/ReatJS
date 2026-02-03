@@ -1,0 +1,46 @@
+.encabezado {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+}
+
+/* LOGO */
+.logo img {
+    width: 60px;
+}
+
+/* MENU */
+.menu {
+    flex: 1;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.menu a:hover {
+    color: gold;
+}
+
+/* REDES */
+.redes {
+    display: flex;
+    gap: 10px;
+}
+
+.redes img {
+    width: 20px;
+    cursor: pointer;
+}
