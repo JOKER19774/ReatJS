@@ -1,40 +1,63 @@
 .contenedor-tarjeta {
-  background-color: red;
   width: 90%;
-  height: 300px;
+  height: auto;              
   margin: 40px auto;
+  padding: 20px;
+
+  background-image: url("./assets/fondo3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
   gap: 20px;
-  padding: 20px;
 }
 
 .tarjeta {
   background-color: white;
   width: 22%;
-  height: 220px;
+  padding: 15px;
   border-radius: 10px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;  
 
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 .tarjeta img {
-  width: 80%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
+  width: 100%;
+  height: 110px;
+  object-fit: contain;
 }
 
-.tarjeta p {
-  margin-top: 10px;
-  font-weight: bold;
+.tarjeta h3 {
+  margin: 8px 0 4px;
+}
+
+.tarjeta .descripcion {
+  font-size: 13px;
   text-align: center;
+  color: #444;
+}
+
+.btn-vermas {
+  margin-top: 10px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 12px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-vermas:hover {
+  background-color: #444;
 }

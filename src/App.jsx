@@ -1,21 +1,32 @@
 import ContenedorTarjeta from "./ContenedorTarjeta";
 import Encabezado from "./Encabezado";
+import "./App.css";
 
 function App() {
   return (
     <div>
       <Encabezado />
       <ContenedorTarjeta />
-      <h1>EVND</h1>
-      <h2>Profesor</h2>
-      <h3>M.T.I. Ricardo Luna Santos</h3>
-      
-      <UserComponent />
-      <ProfileComponent />
-      <FeedComponent />
+
+      <div className="cuadro-abajo">
+        <h1>EVND</h1>
+        <h2>Profesor</h2>
+        <h3>M.T.I. Ricardo Luna Santos</h3>
+
+        <UserComponent />
+        <ProfileComponent />
+        <FeedComponent />
+      </div>
+
+      <footer className="pie-pagina">
+        <p>© 2026 EVND | Entornos Virtuales y Negocios Digitales</p>
+        <p>Alumno: Giovanni Gutierrez</p>
+      </footer>
+
     </div>
-  )
+  );
 }
+
 
 function UserComponent(){
   const nombre = "Giovanni";
@@ -50,23 +61,25 @@ function ProfileComponent() {
 }
 
 function FeedComponent() {
-  const materiales = [
-    { id: 1, material: 'grava' },
-    { id: 2, material: 'arena' },
-    { id: 3, material: 'pala' },
-    { id: 4, material: 'martillo' },
-  ]
-
   return (
     <>
-      <p>Lista de materiales de construcción</p>
+      <p>Diferencias entre videojuegos</p>
       <ul>
-        {materiales.map(item => (
-          <li key={item.id}>{item.material}</li>
-        ))}
+        <li>
+          Nintendo: Se enfoca en la diversión familiar, juegos creativos y personajes icónicos como Mario y Zelda.
+        </li>
+        <li>
+          Sega: Fue pionera en la industria de los videojuegos, destacando en los años 90 con Sonic.
+        </li>
+        <li>
+          PlayStation: Se caracteriza por gráficos avanzados y juegos con historias más maduras.
+        </li>
+        <li>
+          Xbox: Destaca por su potencia, servicios en línea y el sistema Game Pass.
+        </li>
       </ul>
     </>
-  ) 
+  );
 }
 
 export default App;
