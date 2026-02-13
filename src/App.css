@@ -1,8 +1,21 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+div:has(> .pie-pagina) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .cuadro-abajo {
   max-width: 900px;
   margin: 50px auto;
   padding: 30px 250px;
   min-height: 180px;
+  flex: 1;
 
   background-image: url("./assets/fondo2.jpg");
   background-size: cover;
@@ -10,16 +23,36 @@
   background-repeat: no-repeat;
 
   border-radius: 25px;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.7);
+  border: 3px solid #ff0000;
+}
+
+.cuadro-abajo h1,
+.cuadro-abajo h2,
+.cuadro-abajo h3,
+.cuadro-abajo p,
+.cuadro-abajo li {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.cuadro-abajo ul {
+  list-style-position: inside;
+}
+
+.cuadro-abajo li {
+  margin: 10px 0;
+  line-height: 1.6;
 }
 
 .pie-pagina {
   width: 100%;
-  margin-top: 40px;
-  padding: 10px 0;
+  margin-top: auto;
+  padding: 20px 0;
 
-  background-color: #111;
+  background-color: #000000;
   color: white;
+  border-top: 3px solid #ff0000;
 
   text-align: center;
   font-size: 14px;

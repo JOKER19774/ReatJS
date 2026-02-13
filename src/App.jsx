@@ -1,28 +1,35 @@
+import { useState } from "react";
 import ContenedorTarjeta from "./ContenedorTarjeta";
 import Encabezado from "./Encabezado";
+import Inicio from "./Inicio";
+import PiePagina from "./PiePagina";
 import "./App.css";
 
 function App() {
+  const [seccionActiva, setSeccionActiva] = useState("inicio");
+
   return (
     <div>
-      <Encabezado />
-      <ContenedorTarjeta />
+      <Encabezado seccionActiva={seccionActiva} setSeccionActiva={setSeccionActiva} />
+      <Inicio seccionActiva={seccionActiva} setSeccionActiva={setSeccionActiva} />
+      
+      {seccionActiva === "inicio" && (
+        <>
+          <ContenedorTarjeta />
 
-      <div className="cuadro-abajo">
-        <h1>EVND</h1>
-        <h2>Profesor</h2>
-        <h3>M.T.I. Ricardo Luna Santos</h3>
+          <div className="cuadro-abajo">
+            <h1>EVND</h1>
+            <h2>Profesor</h2>
+            <h3>M.T.I. Ricardo Luna Santos</h3>
 
-        <UserComponent />
-        <ProfileComponent />
-        <FeedComponent />
-      </div>
-
-      <footer className="pie-pagina">
-        <p>© 2026 EVND | Entornos Virtuales y Negocios Digitales</p>
-        <p>Alumno: Giovanni Gutierrez</p>
-      </footer>
-
+            <UserComponent />
+            <ProfileComponent />
+            <FeedComponent />
+          </div>
+        </>
+      )}
+      
+      <PiePagina />
     </div>
   );
 }
@@ -37,27 +44,19 @@ function UserComponent(){
 }
 
 function ProfileComponent() {
-  
-  const users = [
-    { id: 1, name: 'Diego', role: 'Web Developer' },
-    { id: 2, name: 'Andrea', role: 'Web Designer' },
-    { id: 3, name: 'Pao', role: 'Team Leader' },
-  ]
-
-      return (
+  return (
     <>
-      <p>Lista de usuarios del sistema</p>
-      <ul>
-        {
-          users.map(function(user, index){
-            return (
-              <li key={index}> {user.name} es un {user.role} es un {user.role}</li>
-            )
-          })
-        }
-      </ul>
+      <iframe
+        title="Mapa Centro de Xicotepec"
+        src="https://maps.google.com/maps?q=20.2766,-97.9617&z=16&output=embed"
+        width="100%"
+        height="260"
+        style={{ border: 0, borderRadius: "8px" }}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
     </>
-  )
+  );
 }
 
 function FeedComponent() {

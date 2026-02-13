@@ -4,11 +4,11 @@ import facebook from "./assets/facebook.png";
 import instagram from "./assets/instagram.png";
 import "./Encabezado.css";
 
-function Encabezado() {
+function Encabezado({ seccionActiva, setSeccionActiva }) {
     return (
         <header className="encabezado">
             <Logo />
-            <Menu />
+            <Menu setSeccionActiva={setSeccionActiva} />
             <Redes />
         </header>
     );
@@ -22,15 +22,16 @@ function Logo() {
     );
 }
 
-function Menu() {
+function Menu({ setSeccionActiva }) {
     return (
         <nav className="menu">
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Acerca de</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Contacto</a></li>
-                <li><a href="#">Sucursales</a></li>
+                <li><a href="#Inicio" onClick={(e) => { e.preventDefault(); setSeccionActiva("inicio"); }}>Inicio</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("acerca"); }}>Acerca de</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("productos"); }}>Productos</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("galeria"); }}>Galería</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("contacto"); }}>Contacto</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("sucursales"); }}>Sucursales</a></li>
             </ul>
         </nav>
     );

@@ -1,0 +1,51 @@
+.inicio-container {
+    padding: 20px;
+}
+
+.inicio-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.menu-apartados {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.menu-apartados button {
+    padding: 10px 20px;
+    border: 2px solid #4CAF50;
+    background-color: white;
+    color: #4CAF50;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-apartados button:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-apartados button.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.contenido-apartado {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

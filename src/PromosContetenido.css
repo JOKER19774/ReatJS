@@ -1,0 +1,21 @@
+.promosContenido {
+    background-image: url(./assets/fondo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    margin: auto;
+    min-height: 230px;
+}
+.promosContenido h2 {
+    color: #ffffff;
+    font-family: 'Arial Black', sans-serif;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+}
+.promosContenido .promos-grid {
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    padding: 10px;
+}
