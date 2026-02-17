@@ -41,6 +41,20 @@
     animation: fadeIn 0.3s ease-in;
 }
 
+.mapa-geolocalizacion-apartado {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.mapa-geolocalizacion h3,
+.mapa-geolocalizacion p {
+    margin: 0 0 12px;
+    text-align: center;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

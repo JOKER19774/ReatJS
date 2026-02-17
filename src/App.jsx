@@ -1,8 +1,9 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import ContenedorTarjeta from "./ContenedorTarjeta";
 import Encabezado from "./Encabezado";
 import Inicio from "./Inicio";
 import PiePagina from "./PiePagina";
+import MapaGeolocalizacion from "./MapaGeolocalizacion.jsx";
 import "./App.css";
 
 function App() {
@@ -18,13 +19,8 @@ function App() {
           <ContenedorTarjeta />
 
           <div className="cuadro-abajo">
-            <h1>EVND</h1>
-            <h2>Profesor</h2>
-            <h3>M.T.I. Ricardo Luna Santos</h3>
-
-            <UserComponent />
-            <ProfileComponent />
             <FeedComponent />
+            <ProfileComponent />
           </div>
         </>
       )}
@@ -35,50 +31,41 @@ function App() {
 }
 
 
-function UserComponent(){
-  const nombre = "Giovanni";
-  const apellido = "Gutierrez";
-  const nombrecompleto = <h2>El nombre es: {nombre} y su apellido {apellido}</h2>;
-
-  return <h1>User Component {nombrecompleto}</h1>
-}
-
 function ProfileComponent() {
-  return (
-    <>
-      <iframe
-        title="Mapa Centro de Xicotepec"
-        src="https://maps.google.com/maps?q=20.2766,-97.9617&z=16&output=embed"
-        width="100%"
-        height="260"
-        style={{ border: 0, borderRadius: "8px" }}
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </>
-  );
+  return <MapaGeolocalizacion />;
 }
 
 function FeedComponent() {
   return (
     <>
-      <p>Diferencias entre videojuegos</p>
-      <ul>
-        <li>
-          Nintendo: Se enfoca en la diversión familiar, juegos creativos y personajes icónicos como Mario y Zelda.
-        </li>
-        <li>
-          Sega: Fue pionera en la industria de los videojuegos, destacando en los años 90 con Sonic.
-        </li>
-        <li>
-          PlayStation: Se caracteriza por gráficos avanzados y juegos con historias más maduras.
-        </li>
-        <li>
-          Xbox: Destaca por su potencia, servicios en línea y el sistema Game Pass.
-        </li>
-      </ul>
+      <p>
+        Nuestra empresa vende consolas de videojuegos de Sega, Xbox, Play y
+        Nintendo, y tambien videojuegos para esas mismas consolas.
+      </p>
+      <p>
+        Contamos con consolas nuevas y seminuevas, controles, accesorios,
+        membresias y ediciones especiales. Tambien ofrecemos catalogo de juegos
+        clasicos y actuales para cada plataforma, con atencion personalizada
+        para ayudarte a elegir la mejor opcion segun tu presupuesto y estilo de
+        juego.
+      </p>
+      <p>
+        Manejamos preventas, paquetes promocionales con consola + juego,
+        mantenimiento basico de controles, instalacion de accesorios y
+        recomendaciones por edad, genero y nivel de experiencia.
+      </p>
+      <p>
+        En nuestra tienda puedes encontrar titulos de aventura, deportes,
+        carreras, accion, retro y multijugador, ademas de opciones para juego
+        local y en linea.
+      </p>
+      <p>
+        Tambien brindamos soporte para configurar cuentas, actualizar consolas y
+        resolver dudas tecnicas para que puedas jugar sin complicaciones.
+      </p>
     </>
   );
 }
 
 export default App;
+
