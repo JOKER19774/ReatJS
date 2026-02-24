@@ -4,6 +4,8 @@ import Sucursales from "./Sucursales.jsx";
 import Productos from "./Productos.jsx";
 import Galeria from "./Galeria.jsx";
 import Clima from "./clima.jsx";
+import Usuarios from "./Usuarios.jsx";
+import Carrito from "./Carrito.jsx";
 import "./Inicio.css";
 
 const Inicio = ({ seccionActiva }) => {
@@ -22,6 +24,8 @@ const Inicio = ({ seccionActiva }) => {
         {seccionActiva === "sucursales" && <Sucursales />}
         {seccionActiva === "productos" && <Productos />}
         {seccionActiva === "galeria" && <Galeria />}
+        {seccionActiva === "usuarios" && <Usuarios />}
+        {seccionActiva === "carrito" && <Carrito />}
       </div>
     </div>
   );

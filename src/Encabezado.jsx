@@ -29,6 +29,8 @@ function Menu({ setSeccionActiva }) {
                 <li><a href="#Inicio" onClick={(e) => { e.preventDefault(); setSeccionActiva("inicio"); }}>Inicio</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("acerca"); }}>Acerca de</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("productos"); }}>Productos</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("carrito"); }}>Carrito</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("usuarios"); }}>Usuarios</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("galeria"); }}>Galería</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("contacto"); }}>Contacto</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("sucursales"); }}>Sucursales</a></li>

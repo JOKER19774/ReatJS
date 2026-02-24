@@ -63,3 +63,28 @@
     background-color: #cc0000;
     transform: scale(1.05);
 }
+
+.contacto-botones {
+    display: flex;
+    gap: 12px;
+}
+
+.contacto-botones button {
+    flex: 1;
+}
+
+.contacto-form .btn-limpiar {
+    background-color: #444444;
+    border-color: #bbbbbb;
+}
+
+.contacto-form .btn-limpiar:hover {
+    background-color: #333333;
+}
+
+.contacto-estado {
+    margin-top: 16px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 700;
+}
