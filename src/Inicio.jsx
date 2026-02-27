@@ -8,7 +8,16 @@ import Usuarios from "./Usuarios.jsx";
 import Carrito from "./Carrito.jsx";
 import "./Inicio.css";
 
-const Inicio = ({ seccionActiva }) => {
+const Inicio = ({
+  seccionActiva,
+  onComprarProducto,
+  productosComprados,
+  onEliminarProductoComprado,
+  onCambiarCantidadProducto,
+  ultimoProductoAgregado,
+  onVaciarCarrito,
+  onTerminarCompra,
+}) => {
   return (
     <div className="inicio-container">
       {seccionActiva === "inicio" && (
@@ -22,10 +31,19 @@ const Inicio = ({ seccionActiva }) => {
         {seccionActiva === "acerca" && <AcercaDe />}
         {seccionActiva === "contacto" && <Contacto />}
         {seccionActiva === "sucursales" && <Sucursales />}
-        {seccionActiva === "productos" && <Productos />}
+        {seccionActiva === "productos" && <Productos onComprarProducto={onComprarProducto} />}
         {seccionActiva === "galeria" && <Galeria />}
         {seccionActiva === "usuarios" && <Usuarios />}
-        {seccionActiva === "carrito" && <Carrito />}
+        {seccionActiva === "carrito" && (
+          <Carrito
+            productosComprados={productosComprados}
+            onEliminarProductoComprado={onEliminarProductoComprado}
+            onCambiarCantidadProducto={onCambiarCantidadProducto}
+            ultimoProductoAgregado={ultimoProductoAgregado}
+            onVaciarCarrito={onVaciarCarrito}
+            onTerminarCompra={onTerminarCompra}
+          />
+        )}
       </div>
     </div>
   );

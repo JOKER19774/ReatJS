@@ -8,11 +8,71 @@ import "./App.css";
 
 function App() {
   const [seccionActiva, setSeccionActiva] = useState("inicio");
+  const [productosComprados, setProductosComprados] = useState([]);
+  const [ultimoProductoAgregado, setUltimoProductoAgregado] = useState(null);
+
+  const agregarProductoAlCarrito = (producto) => {
+    setUltimoProductoAgregado({ ...producto, ts: Date.now() });
+    setProductosComprados((actual) => {
+      const productoExistente = actual.find((item) => item.id === producto.id);
+
+      if (productoExistente) {
+        return actual.map((item) =>
+          item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
+        );
+      }
+
+      return [
+        ...actual,
+        {
+          id: producto.id,
+          title: producto.title,
+          image: producto.image,
+          price: producto.price,
+          cantidad: 1,
+        },
+      ];
+    });
+  };
+
+  const eliminarProductoComprado = (id) => {
+    setProductosComprados((actual) => actual.filter((item) => item.id !== id));
+  };
+
+  const cambiarCantidadProducto = (id, delta) => {
+    setProductosComprados((actual) =>
+      actual
+        .map((item) =>
+          item.id === id ? { ...item, cantidad: Math.max(1, item.cantidad + delta) } : item
+        )
+        .filter((item) => item.cantidad > 0)
+    );
+  };
+
+  const vaciarCarrito = () => {
+    setProductosComprados([]);
+  };
+
+  const terminarCompra = () => {
+    if (productosComprados.length === 0) return;
+    window.alert("Compra terminada con exito.");
+    setProductosComprados([]);
+  };
 
   return (
     <div>
       <Encabezado seccionActiva={seccionActiva} setSeccionActiva={setSeccionActiva} />
-      <Inicio seccionActiva={seccionActiva} setSeccionActiva={setSeccionActiva} />
+      <Inicio
+        seccionActiva={seccionActiva}
+        setSeccionActiva={setSeccionActiva}
+        onComprarProducto={agregarProductoAlCarrito}
+        productosComprados={productosComprados}
+        onEliminarProductoComprado={eliminarProductoComprado}
+        onCambiarCantidadProducto={cambiarCantidadProducto}
+        ultimoProductoAgregado={ultimoProductoAgregado}
+        onVaciarCarrito={vaciarCarrito}
+        onTerminarCompra={terminarCompra}
+      />
       
       {seccionActiva === "inicio" && (
         <>
