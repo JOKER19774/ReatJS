@@ -15,6 +15,69 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
+.form-editar-producto {
+    width: min(100%, 640px);
+    margin: 0 auto 22px;
+}
+
+.form-editar-producto h3 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 22px;
+}
+
+.tabla-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+}
+
+.tabla-productos-edicion {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.55);
+    border: 2px solid #ff0000;
+    box-shadow: 0 6px 16px rgba(255, 0, 0, 0.35);
+}
+
+.tabla-productos-edicion th,
+.tabla-productos-edicion td {
+    border: 1px solid rgba(255, 102, 102, 0.65);
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.tabla-productos-edicion th {
+    background-color: rgba(255, 0, 0, 0.25);
+    color: #ffffff;
+}
+
+.input-producto {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ff6666;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+    padding: 6px 8px;
+}
+
+.input-producto:focus {
+    outline: none;
+    border-color: #ff8a8a;
+    box-shadow: 0 0 0 3px rgba(255, 102, 102, 0.22);
+}
+
+.acciones-edicion-producto {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 .productos-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -96,6 +159,18 @@
 
 .btn-eliminar {
     background: #c40000;
+}
+
+.btn-editar {
+    background: #c7a417;
+}
+
+.btn-guardar {
+    background: #2a8f2a;
+}
+
+.btn-cancelar {
+    background: #555555;
 }
 
 .btn-producto:hover {

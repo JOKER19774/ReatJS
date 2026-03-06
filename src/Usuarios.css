@@ -3,16 +3,52 @@
   margin: 20px auto;
   padding: 32px 20px;
   background: linear-gradient(135deg, #000000 0%, #ff0000 100%);
-  border: 3px solid #ff0000;
-  border-radius: 8px;
+  border: 1px solid #ff0000;
+  border-radius: 10px;
 }
 
 .usuarios h2 {
   margin-bottom: 24px;
   text-align: center;
   color: #ffffff;
-  font-size: 32px;
+  font-size: 30px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.form-editar-usuario {
+  width: min(100%, 360px);
+  margin: 0 auto 22px;
+  padding: 20px;
+  border: 1px solid rgba(110, 208, 110, 0.7);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+.form-editar-usuario h3 {
+  margin: 0 0 14px;
+  color: #ffffff;
+  font-size: 20px;
+  text-align: center;
+}
+
+.campos-formulario {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.campo-edicion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-edicion span {
+  font-size: 13px;
+  color: #f1f1f1;
+  font-weight: 600;
 }
 
 .tabla-wrapper {
@@ -20,14 +56,14 @@
   margin: 0 auto;
   overflow-x: auto;
   border-radius: 8px;
+  border: 1px solid rgba(255, 102, 102, 0.65);
 }
 
 .tabla-usuarios {
   width: 100%;
   border-collapse: collapse;
   background-color: rgba(0, 0, 0, 0.55);
-  border: 2px solid #ff0000;
-  box-shadow: 0 6px 16px rgba(255, 0, 0, 0.35);
+  border: 1px solid rgba(255, 102, 102, 0.65);
 }
 
 .tabla-usuarios th,
@@ -85,14 +121,24 @@
   flex-wrap: wrap;
 }
 
+.acciones-edicion-formulario {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
 .btn-guardar {
-  background-color: #2a8f2a;
-  border-color: #6ed06e;
+  background-color: #1fbc4a;
+  border-color: #18a840;
 }
 
 .btn-cancelar {
   background-color: #555555;
   border-color: #aaaaaa;
+}
+
+.btn-principal {
+  width: 100%;
 }
 
 .input-usuario {
@@ -102,5 +148,15 @@
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.35);
   color: #ffffff;
-  padding: 6px 8px;
+  padding: 8px 10px;
+}
+
+.input-usuario::placeholder {
+  color: #d5d5d5;
+}
+
+.input-usuario:focus {
+  outline: none;
+  border-color: #ff8a8a;
+  box-shadow: 0 0 0 3px rgba(255, 102, 102, 0.22);
 }

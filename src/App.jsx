@@ -4,12 +4,14 @@ import Encabezado from "./Encabezado";
 import Inicio from "./Inicio";
 import PiePagina from "./PiePagina";
 import MapaGeolocalizacion from "./MapaGeolocalizacion.jsx";
+import usuariosIniciales from "./usuariosIniciales";
 import "./App.css";
 
 function App() {
   const [seccionActiva, setSeccionActiva] = useState("inicio");
   const [productosComprados, setProductosComprados] = useState([]);
   const [ultimoProductoAgregado, setUltimoProductoAgregado] = useState(null);
+  const [usuarios, setUsuarios] = useState(usuariosIniciales);
 
   const agregarProductoAlCarrito = (producto) => {
     setUltimoProductoAgregado({ ...producto, ts: Date.now() });
@@ -72,6 +74,8 @@ function App() {
         ultimoProductoAgregado={ultimoProductoAgregado}
         onVaciarCarrito={vaciarCarrito}
         onTerminarCompra={terminarCompra}
+        usuarios={usuarios}
+        setUsuarios={setUsuarios}
       />
       
       {seccionActiva === "inicio" && (

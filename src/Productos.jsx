@@ -34,6 +34,12 @@ function Productos({ onComprarProducto }) {
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [articuloAgregado, setArticuloAgregado] = useState(null);
+  const [editandoId, setEditandoId] = useState(null);
+  const [formularioEdicion, setFormularioEdicion] = useState({
+    title: "",
+    price: "",
+    image: "",
+  });
 
   useEffect(() => {
     const obtenerProductos = async () => {
@@ -69,6 +75,61 @@ function Productos({ onComprarProducto }) {
 
   const eliminarProducto = (id) => {
     setProductos((actual) => actual.filter((producto) => producto.id !== id));
+    if (editandoId === id) {
+      cancelarEdicion();
+    }
+  };
+
+  const iniciarEdicion = (producto) => {
+    setEditandoId(producto.id);
+    setFormularioEdicion({
+      title: producto.title ?? "",
+      price: String(producto.price ?? ""),
+      image: producto.image ?? "",
+    });
+  };
+
+  const cancelarEdicion = () => {
+    setEditandoId(null);
+    setFormularioEdicion({
+      title: "",
+      price: "",
+      image: "",
+    });
+  };
+
+  const actualizarCampoEdicion = (campo, valor) => {
+    setFormularioEdicion((actual) => ({ ...actual, [campo]: valor }));
+  };
+
+  const guardarEdicion = (event) => {
+    event.preventDefault();
+
+    const tituloValido = formularioEdicion.title.trim() !== "";
+    const imagenValida = formularioEdicion.image.trim() !== "";
+    const precioNumero = Number(formularioEdicion.price);
+    const precioValido = Number.isFinite(precioNumero) && precioNumero > 0;
+
+    if (!tituloValido || !imagenValida || !precioValido) {
+      window.alert("Completa titulo, precio valido e imagen para editar el producto.");
+      return;
+    }
+
+    setProductos((actual) =>
+      actual.map((producto) =>
+        producto.id === editandoId
+          ? {
+              ...producto,
+              title: formularioEdicion.title.trim(),
+              price: Number(precioNumero.toFixed(2)),
+              image: formularioEdicion.image.trim(),
+            }
+          : producto
+      )
+    );
+
+    window.alert("Cambios realizados con exito.");
+    cancelarEdicion();
   };
 
   if (cargando) return <p className="descripcion">Cargando productos...</p>;
@@ -76,6 +137,71 @@ function Productos({ onComprarProducto }) {
   return (
     <div className="productos">
       <h2>Catalogo Productos</h2>
+
+      {editandoId !== null && (
+        <form className="form-editar-producto" onSubmit={guardarEdicion}>
+          <h3>Editando producto #{editandoId}</h3>
+          <div className="tabla-wrapper">
+            <table className="tabla-productos-edicion">
+              <thead>
+                <tr>
+                  <th>Titulo</th>
+                  <th>Precio</th>
+                  <th>Imagen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input
+                      className="input-producto"
+                      type="text"
+                      value={formularioEdicion.title}
+                      onChange={(event) =>
+                        actualizarCampoEdicion("title", event.target.value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      className="input-producto"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={formularioEdicion.price}
+                      onChange={(event) =>
+                        actualizarCampoEdicion("price", event.target.value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      className="input-producto"
+                      type="text"
+                      value={formularioEdicion.image}
+                      onChange={(event) =>
+                        actualizarCampoEdicion("image", event.target.value)
+                      }
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="acciones-edicion-producto">
+            <button type="submit" className="btn-producto btn-guardar">
+              Guardar cambios
+            </button>
+            <button
+              type="button"
+              className="btn-producto btn-cancelar"
+              onClick={cancelarEdicion}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      )}
 
       {articuloAgregado && (
         <div className="ventana-articulo" role="status" aria-live="polite">
@@ -104,6 +230,13 @@ function Productos({ onComprarProducto }) {
                 onClick={() => comprarProducto(producto)}
               >
                 Comprar producto
+              </button>
+              <button
+                type="button"
+                className="btn-producto btn-editar"
+                onClick={() => iniciarEdicion(producto)}
+              >
+                Editar
               </button>
               <button
                 type="button"

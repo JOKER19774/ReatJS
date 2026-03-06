@@ -6,6 +6,7 @@ import Galeria from "./Galeria.jsx";
 import Clima from "./clima.jsx";
 import Usuarios from "./Usuarios.jsx";
 import Carrito from "./Carrito.jsx";
+import Login from "./Login.jsx";
 import "./Inicio.css";
 
 const Inicio = ({
@@ -17,6 +18,8 @@ const Inicio = ({
   ultimoProductoAgregado,
   onVaciarCarrito,
   onTerminarCompra,
+  usuarios,
+  setUsuarios,
 }) => {
   return (
     <div className="inicio-container">
@@ -33,7 +36,10 @@ const Inicio = ({
         {seccionActiva === "sucursales" && <Sucursales />}
         {seccionActiva === "productos" && <Productos onComprarProducto={onComprarProducto} />}
         {seccionActiva === "galeria" && <Galeria />}
-        {seccionActiva === "usuarios" && <Usuarios />}
+        {seccionActiva === "usuarios" && (
+          <Usuarios usuarios={usuarios} setUsuarios={setUsuarios} />
+        )}
+        {seccionActiva === "login" && <Login usuarios={usuarios} />}
         {seccionActiva === "carrito" && (
           <Carrito
             productosComprados={productosComprados}

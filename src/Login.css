@@ -1,0 +1,120 @@
+.login {
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 28px 20px 32px;
+  background: linear-gradient(135deg, #000000 0%, #ff0000 100%);
+  border: 3px solid #ff0000;
+  border-radius: 8px;
+}
+
+.login-avatar {
+  width: 92px;
+  margin: 0 auto 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-cabeza {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f1f1f1;
+  display: block;
+}
+
+.avatar-cuerpo {
+  width: 76px;
+  height: 34px;
+  border-radius: 38px 38px 10px 10px;
+  background: #e0e0e0;
+  display: block;
+  margin-top: 6px;
+}
+
+.login h2 {
+  margin: 0 0 24px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 30px;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.form-login {
+  width: min(100%, 420px);
+  margin: 0 auto;
+  padding: 8px 0 0;
+  border: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.campo-login {
+  position: relative;
+  width: 100%;
+}
+
+.icono-campo {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+.input-login {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ff6666;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 10px 10px 10px 38px;
+}
+
+.input-login:focus {
+  outline: none;
+  border-color: #ff8a8a;
+  box-shadow: 0 0 0 3px rgba(255, 102, 102, 0.22);
+}
+
+.fila-opciones-login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: #f1f1f1;
+}
+
+.link-accion-login {
+  border: 0;
+  background: transparent;
+  color: #ffd6d6;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-login {
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-login:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.btn-acceder {
+  border-color: #6ed06e;
+  background-color: #2a8f2a;
+}

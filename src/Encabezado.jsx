@@ -31,6 +31,7 @@ function Menu({ setSeccionActiva }) {
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("productos"); }}>Productos</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("carrito"); }}>Carrito</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("usuarios"); }}>Usuarios</a></li>
+                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("login"); }}>Login</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("galeria"); }}>Galería</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("contacto"); }}>Contacto</a></li>
                 <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("sucursales"); }}>Sucursales</a></li>
@@ -50,3 +51,4 @@ function Redes() {
 }
 
 export default Encabezado;
+

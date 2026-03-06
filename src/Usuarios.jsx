@@ -1,113 +1,19 @@
 import { useState } from "react";
 import "./Usuarios.css";
 
-const usuariosIniciales = [
-  {
-    id: 1,
-    nombre: "john",
-    apellidos: "doe",
-    direccion: "new road 7682 kilcoole 12926-3874",
-    telefono: "1-570-236-7033",
-    correo: "john@gmail.com",
-    username: "johnd",
-    password: "m3BmrfS",
-  },
-  {
-    id: 2,
-    nombre: "david",
-    apellidos: "morrison",
-    direccion: "Lovers Ln 7267 kilcoole 12926-3874",
-    telefono: "1-570-236-7033",
-    correo: "morrison@gmail.com",
-    username: "mor_2314",
-    password: "83r5^_",
-  },
-  {
-    id: 3,
-    nombre: "kevin",
-    apellidos: "ryan",
-    direccion: "Frances Ct 86 Cullman 29567-1452",
-    telefono: "1-567-094-1345",
-    correo: "kevin@gmail.com",
-    username: "kevinryan",
-    password: "kev02937@",
-  },
-  {
-    id: 4,
-    nombre: "don",
-    apellidos: "romer",
-    direccion: "Hunters Creek Dr 6454 San Antonio 98234-1734",
-    telefono: "1-765-789-6734",
-    correo: "don@gmail.com",
-    username: "donero",
-    password: "ewedon",
-  },
-  {
-    id: 5,
-    nombre: "derek",
-    apellidos: "powell",
-    direccion: "adams St 245 san Antonio 80796-1234",
-    telefono: "1-956-001-1945",
-    correo: "derek@gmail.com",
-    username: "derek",
-    password: "jklg*_56",
-  },
-  {
-    id: 6,
-    nombre: "david",
-    apellidos: "russell",
-    direccion: "prospect st 124 el paso 12346-0456",
-    telefono: "1-678-345-9856",
-    correo: "david_r@gmail.com",
-    username: "david_r",
-    password: "3478^#54",
-  },
-  {
-    id: 7,
-    nombre: "miriam",
-    apellidos: "snyder",
-    direccion: "saddle st 1342 fresno 96378-0245",
-    telefono: "1-123-943-0563",
-    correo: "miriam@gmail.com",
-    username: "snyder",
-    password: "l238&@*$",
-  },
-  {
-    id: 8,
-    nombre: "william",
-    apellidos: "hopkins",
-    direccion: "vally view ln 1342 mesa 96378-0245",
-    telefono: "1-478-001-0890",
-    correo: "william@gmail.com",
-    username: "hopkins",
-    password: "William56Shj",
-  },
-  {
-    id: 9,
-    nombre: "kate",
-    apellidos: "hale",
-    direccion: "avondale ave 345 miami 96378-0245",
-    telefono: "1-678-456-1934",
-    correo: "kate@gmail.com",
-    username: "kate_h",
-    password: "kiejk@*_-",
-  },
-  {
-    id: 10,
-    nombre: "jimmie",
-    apellidos: "klein",
-    direccion: "oak lawn ave 526 fort wayne 10256-4532",
-    telefono: "1-104-001-4567",
-    correo: "jimmie@gmail.com",
-    username: "jimmie_k",
-    password: "klein*#%^",
-  },
-];
+const estadoInicialFormulario = {
+  nombre: "",
+  apellidos: "",
+  direccion: "",
+  telefono: "",
+  correo: "",
+  username: "",
+  password: "",
+};
 
-function Usuarios() {
-  const [usuarios, setUsuarios] = useState(usuariosIniciales);
+function Usuarios({ usuarios, setUsuarios }) {
   const [editandoId, setEditandoId] = useState(null);
-  const [formulario, setFormulario] = useState(null);
+  const [formulario, setFormulario] = useState(estadoInicialFormulario);
 
   const iniciarEdicion = (usuario) => {
     setEditandoId(usuario.id);
@@ -116,13 +22,27 @@ function Usuarios() {
 
   const cancelarEdicion = () => {
     setEditandoId(null);
-    setFormulario(null);
+    setFormulario(estadoInicialFormulario);
   };
 
-  const guardarEdicion = (id) => {
-    setUsuarios((actual) =>
-      actual.map((usuario) => (usuario.id === id ? formulario : usuario))
+  const guardarEdicion = (event) => {
+    event.preventDefault();
+
+    const camposCompletos = Object.values(formulario).every((valor) =>
+      typeof valor === "string" ? valor.trim() !== "" : true
     );
+
+    if (!camposCompletos) {
+      window.alert("Completa todos los campos para editar el usuario.");
+      return;
+    }
+
+    setUsuarios((actual) =>
+      actual.map((usuario) =>
+        usuario.id === editandoId ? { ...usuario, ...formulario } : usuario
+      )
+    );
+    window.alert("Cambios realizados con exito.");
     cancelarEdicion();
   };
 
@@ -137,24 +57,92 @@ function Usuarios() {
     setFormulario((actual) => ({ ...actual, [campo]: valor }));
   };
 
-  const renderCelda = (usuario, campo) => {
-    if (editandoId !== usuario.id) {
-      return usuario[campo];
-    }
-
-    return (
-      <input
-        className="input-usuario"
-        type="text"
-        value={formulario[campo]}
-        onChange={(event) => actualizarCampo(campo, event.target.value)}
-      />
-    );
-  };
-
   return (
     <section className="usuarios">
       <h2>Usuarios Registrados</h2>
+
+      {editandoId !== null && (
+        <form className="form-editar-usuario" onSubmit={guardarEdicion}>
+          <h3>Registrar Usuarios</h3>
+          <div className="campos-formulario">
+            <label className="campo-edicion">
+              <span>Nombre de usuario</span>
+              <input
+                className="input-usuario"
+                type="text"
+                value={formulario.nombre}
+                onChange={(event) => actualizarCampo("nombre", event.target.value)}
+              />
+            </label>
+            <label className="campo-edicion">
+              <span>Apellidos</span>
+              <input
+                className="input-usuario"
+                type="text"
+                value={formulario.apellidos}
+                onChange={(event) => actualizarCampo("apellidos", event.target.value)}
+              />
+            </label>
+            <label className="campo-edicion">
+              <span>Direccion</span>
+              <input
+                className="input-usuario"
+                type="text"
+                value={formulario.direccion}
+                onChange={(event) => actualizarCampo("direccion", event.target.value)}
+              />
+            </label>
+            <label className="campo-edicion">
+              <span>Telefono</span>
+              <input
+                className="input-usuario"
+                type="text"
+                value={formulario.telefono}
+                onChange={(event) => actualizarCampo("telefono", event.target.value)}
+              />
+            </label>
+            <label className="campo-edicion">
+              <span>Correo</span>
+              <input
+                className="input-usuario"
+                type="email"
+                value={formulario.correo}
+                onChange={(event) => actualizarCampo("correo", event.target.value)}
+              />
+            </label>
+            <label className="campo-edicion">
+              <span>Usuario</span>
+              <input
+                className="input-usuario"
+                type="text"
+                value={formulario.username}
+                onChange={(event) => actualizarCampo("username", event.target.value)}
+              />
+            </label>
+            <label className="campo-edicion">
+              <span>Password</span>
+              <input
+                className="input-usuario"
+                type="text"
+                value={formulario.password}
+                onChange={(event) => actualizarCampo("password", event.target.value)}
+              />
+            </label>
+          </div>
+          <div className="acciones-edicion-formulario">
+            <button className="btn-editar btn-guardar btn-principal" type="submit">
+              Registrar
+            </button>
+            <button
+              className="btn-editar btn-cancelar"
+              type="button"
+              onClick={cancelarEdicion}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      )}
 
       <div className="tabla-wrapper">
         <table className="tabla-usuarios">
@@ -174,40 +162,21 @@ function Usuarios() {
           <tbody>
             {usuarios.map((usuario) => (
               <tr key={usuario.id}>
-                <td>{renderCelda(usuario, "nombre")}</td>
-                <td>{renderCelda(usuario, "apellidos")}</td>
-                <td>{renderCelda(usuario, "direccion")}</td>
-                <td>{renderCelda(usuario, "telefono")}</td>
-                <td>{renderCelda(usuario, "correo")}</td>
-                <td>{renderCelda(usuario, "username")}</td>
-                <td>{renderCelda(usuario, "password")}</td>
+                <td>{usuario.nombre}</td>
+                <td>{usuario.apellidos}</td>
+                <td>{usuario.direccion}</td>
+                <td>{usuario.telefono}</td>
+                <td>{usuario.correo}</td>
+                <td>{usuario.username}</td>
+                <td>{usuario.password}</td>
                 <td>
-                  {editandoId === usuario.id ? (
-                    <div className="acciones-edicion">
-                      <button
-                        className="btn-editar btn-guardar"
-                        type="button"
-                        onClick={() => guardarEdicion(usuario.id)}
-                      >
-                        Guardar
-                      </button>
-                      <button
-                        className="btn-editar btn-cancelar"
-                        type="button"
-                        onClick={cancelarEdicion}
-                      >
-                        Cancelar
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      className="btn-editar"
-                      type="button"
-                      onClick={() => iniciarEdicion(usuario)}
-                    >
-                      Editar
-                    </button>
-                  )}
+                  <button
+                    className="btn-editar"
+                    type="button"
+                    onClick={() => iniciarEdicion(usuario)}
+                  >
+                    Editar
+                  </button>
                 </td>
                 <td>
                   <button
