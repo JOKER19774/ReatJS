@@ -41,6 +41,27 @@
     animation: fadeIn 0.3s ease-in;
 }
 
+.apartado-no-logeado {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 18px;
+    border: 2px solid #ff3d3d;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #ffffff;
+}
+
+.apartado-no-logeado h2 {
+    margin: 0 0 8px;
+    text-align: center;
+    color: #ff9a9a;
+}
+
+.apartado-no-logeado p {
+    margin: 0 0 14px;
+    text-align: center;
+}
+
 .mapa-geolocalizacion-apartado {
     max-width: 900px;
     margin: 0 auto 30px;

@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useAuth } from "./AuthContext.jsx";
 import "./Login.css";
 
 function Login({ usuarios }) {
+  const { autenticado, usuarioActual, login, logout } = useAuth();
   const [credenciales, setCredenciales] = useState({
     usuario: "",
     password: "",
@@ -28,6 +30,12 @@ function Login({ usuarios }) {
       return;
     }
 
+    login({
+      id: usuarioEncontrado.id,
+      username: usuarioEncontrado.username,
+      nombre: usuarioEncontrado.nombre,
+    });
+
     window.alert("Usuario y contrasena correctos. Acceso realizado con exito.");
   };
 
@@ -38,6 +46,11 @@ function Login({ usuarios }) {
         <span className="avatar-cuerpo"></span>
       </div>
       <h2>USER LOGIN</h2>
+      {autenticado && (
+        <p className="estado-login">
+          Sesion iniciada: <strong>{usuarioActual?.username}</strong>
+        </p>
+      )}
       <form className="form-login" onSubmit={enviarLogin}>
         <div className="campo-login">
           <span className="icono-campo" aria-hidden="true">U</span>
@@ -75,6 +88,11 @@ function Login({ usuarios }) {
         <button className="btn-login btn-acceder" type="submit">
           ACCEDER
         </button>
+        {autenticado && (
+          <button className="btn-login btn-salir" type="button" onClick={logout}>
+            CERRAR SESION
+          </button>
+        )}
       </form>
     </section>
   );

@@ -7,6 +7,8 @@ import Clima from "./clima.jsx";
 import Usuarios from "./Usuarios.jsx";
 import Carrito from "./Carrito.jsx";
 import Login from "./Login.jsx";
+import NieblaNegra from "./NieblaNegra.jsx";
+import { useAuth } from "./AuthContext.jsx";
 import "./Inicio.css";
 
 const Inicio = ({
@@ -21,34 +23,80 @@ const Inicio = ({
   usuarios,
   setUsuarios,
 }) => {
+  const { autenticado } = useAuth();
+  const seccionesProtegidas = ["productos", "carrito", "usuarios"];
+  const intentandoSeccionProtegida = seccionesProtegidas.includes(seccionActiva);
+  const mostrarApartadoNoLogeado = intentandoSeccionProtegida && !autenticado;
+
   return (
     <div className="inicio-container">
       {seccionActiva === "inicio" && (
-        <>
+        <NieblaNegra>
           <h1>Bienvenido a Inicio</h1>
           <Clima />
-        </>
+        </NieblaNegra>
       )}
 
       <div className="contenido-apartado">
-        {seccionActiva === "acerca" && <AcercaDe />}
-        {seccionActiva === "contacto" && <Contacto />}
-        {seccionActiva === "sucursales" && <Sucursales />}
-        {seccionActiva === "productos" && <Productos onComprarProducto={onComprarProducto} />}
-        {seccionActiva === "galeria" && <Galeria />}
-        {seccionActiva === "usuarios" && (
-          <Usuarios usuarios={usuarios} setUsuarios={setUsuarios} />
+        {mostrarApartadoNoLogeado && (
+          <NieblaNegra>
+            <section className="apartado-no-logeado">
+              <h2>Debes iniciar sesion</h2>
+              <p>
+                Esta seccion requiere acceso para mostrar componentes protegidos:
+                Productos, Carrito y Usuarios.
+              </p>
+              <Login usuarios={usuarios} />
+            </section>
+          </NieblaNegra>
         )}
-        {seccionActiva === "login" && <Login usuarios={usuarios} />}
-        {seccionActiva === "carrito" && (
-          <Carrito
-            productosComprados={productosComprados}
-            onEliminarProductoComprado={onEliminarProductoComprado}
-            onCambiarCantidadProducto={onCambiarCantidadProducto}
-            ultimoProductoAgregado={ultimoProductoAgregado}
-            onVaciarCarrito={onVaciarCarrito}
-            onTerminarCompra={onTerminarCompra}
-          />
+
+        {seccionActiva === "acerca" && (
+          <NieblaNegra>
+            <AcercaDe />
+          </NieblaNegra>
+        )}
+        {seccionActiva === "contacto" && (
+          <NieblaNegra>
+            <Contacto />
+          </NieblaNegra>
+        )}
+        {seccionActiva === "sucursales" && (
+          <NieblaNegra>
+            <Sucursales />
+          </NieblaNegra>
+        )}
+        {seccionActiva === "productos" && autenticado && (
+          <NieblaNegra>
+            <Productos onComprarProducto={onComprarProducto} />
+          </NieblaNegra>
+        )}
+        {seccionActiva === "galeria" && (
+          <NieblaNegra>
+            <Galeria />
+          </NieblaNegra>
+        )}
+        {seccionActiva === "usuarios" && autenticado && (
+          <NieblaNegra>
+            <Usuarios usuarios={usuarios} setUsuarios={setUsuarios} />
+          </NieblaNegra>
+        )}
+        {seccionActiva === "login" && (
+          <NieblaNegra>
+            <Login usuarios={usuarios} />
+          </NieblaNegra>
+        )}
+        {seccionActiva === "carrito" && autenticado && (
+          <NieblaNegra>
+            <Carrito
+              productosComprados={productosComprados}
+              onEliminarProductoComprado={onEliminarProductoComprado}
+              onCambiarCantidadProducto={onCambiarCantidadProducto}
+              ultimoProductoAgregado={ultimoProductoAgregado}
+              onVaciarCarrito={onVaciarCarrito}
+              onTerminarCompra={onTerminarCompra}
+            />
+          </NieblaNegra>
         )}
       </div>
     </div>

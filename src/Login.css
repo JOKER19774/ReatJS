@@ -41,6 +41,12 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
+.estado-login {
+  margin: 0 0 12px;
+  text-align: center;
+  color: #d7ffd7;
+}
+
 .form-login {
   width: min(100%, 420px);
   margin: 0 auto;
@@ -117,4 +123,9 @@
 .btn-acceder {
   border-color: #6ed06e;
   background-color: #2a8f2a;
+}
+
+.btn-salir {
+  border-color: #ffb3b3;
+  background-color: #8a1111;
 }

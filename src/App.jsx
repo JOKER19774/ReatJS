@@ -5,6 +5,7 @@ import Inicio from "./Inicio";
 import PiePagina from "./PiePagina";
 import MapaGeolocalizacion from "./MapaGeolocalizacion.jsx";
 import usuariosIniciales from "./usuariosIniciales";
+import NieblaNegra from "./NieblaNegra.jsx";
 import "./App.css";
 
 function App() {
@@ -63,33 +64,43 @@ function App() {
 
   return (
     <div>
-      <Encabezado seccionActiva={seccionActiva} setSeccionActiva={setSeccionActiva} />
-      <Inicio
-        seccionActiva={seccionActiva}
-        setSeccionActiva={setSeccionActiva}
-        onComprarProducto={agregarProductoAlCarrito}
-        productosComprados={productosComprados}
-        onEliminarProductoComprado={eliminarProductoComprado}
-        onCambiarCantidadProducto={cambiarCantidadProducto}
-        ultimoProductoAgregado={ultimoProductoAgregado}
-        onVaciarCarrito={vaciarCarrito}
-        onTerminarCompra={terminarCompra}
-        usuarios={usuarios}
-        setUsuarios={setUsuarios}
-      />
+      <NieblaNegra>
+        <Encabezado seccionActiva={seccionActiva} setSeccionActiva={setSeccionActiva} />
+      </NieblaNegra>
+      <NieblaNegra>
+        <Inicio
+          seccionActiva={seccionActiva}
+          setSeccionActiva={setSeccionActiva}
+          onComprarProducto={agregarProductoAlCarrito}
+          productosComprados={productosComprados}
+          onEliminarProductoComprado={eliminarProductoComprado}
+          onCambiarCantidadProducto={cambiarCantidadProducto}
+          ultimoProductoAgregado={ultimoProductoAgregado}
+          onVaciarCarrito={vaciarCarrito}
+          onTerminarCompra={terminarCompra}
+          usuarios={usuarios}
+          setUsuarios={setUsuarios}
+        />
+      </NieblaNegra>
       
       {seccionActiva === "inicio" && (
         <>
-          <ContenedorTarjeta />
+          <NieblaNegra>
+            <ContenedorTarjeta />
+          </NieblaNegra>
 
-          <div className="cuadro-abajo">
-            <FeedComponent />
-            <ProfileComponent />
-          </div>
+          <NieblaNegra className="cuadro-abajo">
+            <div>
+              <FeedComponent />
+              <ProfileComponent />
+            </div>
+          </NieblaNegra>
         </>
       )}
       
-      <PiePagina />
+      <NieblaNegra>
+        <PiePagina />
+      </NieblaNegra>
     </div>
   );
 }
