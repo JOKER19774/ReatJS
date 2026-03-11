@@ -8,6 +8,7 @@ const usuariosIniciales = [
     correo: "john@gmail.com",
     username: "johnd",
     password: "m3BmrfS",
+    isDesigner: true, // este usuario es diseñador
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const usuariosIniciales = [
     correo: "morrison@gmail.com",
     username: "mor_2314",
     password: "83r5^_",
+    isDesigner: true, // también puede ser diseñador si lo deseas
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const usuariosIniciales = [
     correo: "kevin@gmail.com",
     username: "kevinryan",
     password: "kev02937@",
+    isDesigner: false,
   },
   {
     id: 4,
@@ -38,6 +41,7 @@ const usuariosIniciales = [
     correo: "don@gmail.com",
     username: "donero",
     password: "ewedon",
+    isDesigner: false,
   },
   {
     id: 5,
@@ -48,6 +52,7 @@ const usuariosIniciales = [
     correo: "derek@gmail.com",
     username: "derek",
     password: "jklg*_56",
+    isDesigner: false,
   },
   {
     id: 6,
@@ -58,6 +63,7 @@ const usuariosIniciales = [
     correo: "david_r@gmail.com",
     username: "david_r",
     password: "3478^#54",
+    isDesigner: false,
   },
   {
     id: 7,
@@ -68,6 +74,7 @@ const usuariosIniciales = [
     correo: "miriam@gmail.com",
     username: "snyder",
     password: "l238&@*$",
+    isDesigner: false,
   },
   {
     id: 8,
@@ -78,6 +85,7 @@ const usuariosIniciales = [
     correo: "william@gmail.com",
     username: "hopkins",
     password: "William56Shj",
+    isDesigner: false,
   },
   {
     id: 9,
@@ -88,6 +96,7 @@ const usuariosIniciales = [
     correo: "kate@gmail.com",
     username: "kate_h",
     password: "kiejk@*_-",
+    isDesigner: false,
   },
   {
     id: 10,
@@ -98,7 +107,7 @@ const usuariosIniciales = [
     correo: "jimmie@gmail.com",
     username: "jimmie_k",
     password: "klein*#%^",
+    isDesigner: false,
   },
 ];
-
 export default usuariosIniciales;

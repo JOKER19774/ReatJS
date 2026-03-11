@@ -22,19 +22,214 @@ function Logo() {
     );
 }
 
+import { useAuth } from "./AuthContext.jsx";
+
 function Menu({ setSeccionActiva }) {
+    const { autenticado, esDisenador, logout } = useAuth();
+
+    // si no está autenticado mostramos la mayoría de apartados, pero no enlace a Usuarios ni Carrito
+    if (!autenticado) {
+        return (
+            <nav className="menu">
+                <ul>
+                    <li>
+                        <a
+                            href="#Inicio"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("inicio");
+                            }}
+                        >
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("acerca");
+                            }}
+                        >
+                            Acerca de
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("productos");
+                            }}
+                        >
+                            Productos
+                        </a>
+                    </li>
+                    {/* no mostramos carrito hasta logear */}
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("galeria");
+                            }}
+                        >
+                            Galería
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("contacto");
+                            }}
+                        >
+                            Contacto
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("sucursales");
+                            }}
+                        >
+                            Sucursales
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("login");
+                            }}
+                        >
+                            Iniciar sesión
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        );
+    }
+
+    // ya autenticado mostramos todos los apartados incluyendo Usuarios y Carrito
     return (
         <nav className="menu">
             <ul>
-                <li><a href="#Inicio" onClick={(e) => { e.preventDefault(); setSeccionActiva("inicio"); }}>Inicio</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("acerca"); }}>Acerca de</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("productos"); }}>Productos</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("carrito"); }}>Carrito</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("usuarios"); }}>Usuarios</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("login"); }}>Login</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("galeria"); }}>Galería</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("contacto"); }}>Contacto</a></li>
-                <li><a href="#" onClick={(e) => { e.preventDefault(); setSeccionActiva("sucursales"); }}>Sucursales</a></li>
+                <li>
+                    <a
+                        href="#Inicio"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("inicio");
+                        }}
+                    >
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("acerca");
+                        }}
+                    >
+                        Acerca de
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("productos");
+                        }}
+                    >
+                        Productos
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("carrito");
+                        }}
+                    >
+                        Carrito
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("usuarios");
+                        }}
+                    >
+                        Usuarios
+                    </a>
+                </li>
+                <li>
+                    {autenticado ? (
+                        <button
+                            className="btn-cerrar-sesion"
+                            onClick={() => {
+                                logout();
+                                setSeccionActiva("inicio");
+                            }}
+                        >
+                            Cerrar sesión
+                        </button>
+                    ) : (
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("login");
+                            }}
+                        >
+                            Iniciar sesión
+                        </a>
+                    )}
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("galeria");
+                        }}
+                    >
+                        Galería
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("contacto");
+                        }}
+                    >
+                        Contacto
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setSeccionActiva("sucursales");
+                        }}
+                    >
+                        Sucursales
+                    </a>
+                </li>
             </ul>
         </nav>
     );

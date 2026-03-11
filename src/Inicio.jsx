@@ -23,10 +23,11 @@ const Inicio = ({
   usuarios,
   setUsuarios,
 }) => {
-  const { autenticado } = useAuth();
+  const { autenticado, esDisenador } = useAuth();
   const seccionesProtegidas = ["productos", "carrito", "usuarios"];
   const intentandoSeccionProtegida = seccionesProtegidas.includes(seccionActiva);
   const mostrarApartadoNoLogeado = intentandoSeccionProtegida && !autenticado;
+  const intentoUsuariosNoDesigner = seccionActiva === "usuarios" && autenticado && !esDisenador;
 
   return (
     <div className="inicio-container">
@@ -47,6 +48,15 @@ const Inicio = ({
                 Productos, Carrito y Usuarios.
               </p>
               <Login usuarios={usuarios} />
+            </section>
+          </NieblaNegra>
+        )}
+
+        {intentoUsuariosNoDesigner && (
+          <NieblaNegra>
+            <section className="apartado-no-logeado">
+              <h2>Acceso restringido</h2>
+              <p>Solo los diseñadores pueden ver y editar la lista de usuarios.</p>
             </section>
           </NieblaNegra>
         )}
@@ -76,14 +86,14 @@ const Inicio = ({
             <Galeria />
           </NieblaNegra>
         )}
-        {seccionActiva === "usuarios" && autenticado && (
+        {seccionActiva === "usuarios" && autenticado && esDisenador && (
           <NieblaNegra>
             <Usuarios usuarios={usuarios} setUsuarios={setUsuarios} />
           </NieblaNegra>
         )}
         {seccionActiva === "login" && (
           <NieblaNegra>
-            <Login usuarios={usuarios} />
+            <Login usuarios={usuarios} setUsuarios={setUsuarios} />
           </NieblaNegra>
         )}
         {seccionActiva === "carrito" && autenticado && (

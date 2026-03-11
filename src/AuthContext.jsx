@@ -13,10 +13,13 @@ export function AuthProvider({ children }) {
     setUsuarioActual(null);
   };
 
+  const esDisenador = Boolean(usuarioActual?.isDesigner);
+
   const value = useMemo(
     () => ({
       usuarioActual,
       autenticado: Boolean(usuarioActual),
+      esDisenador,
       login,
       logout,
     }),
