@@ -23,6 +23,7 @@ function Logo() {
 }
 
 import { useAuth } from "./AuthContext.jsx";
+import Categorias from "./Categorias.jsx";
 
 function Menu({ setSeccionActiva }) {
     const { autenticado, esDisenador, logout } = useAuth();
@@ -32,7 +33,7 @@ function Menu({ setSeccionActiva }) {
         return (
             <nav className="menu">
                 <ul>
-                    <li>
+                        <li>
                         <a
                             href="#Inicio"
                             onClick={(e) => {
@@ -42,6 +43,9 @@ function Menu({ setSeccionActiva }) {
                         >
                             Inicio
                         </a>
+                    </li>
+                    <li className="categoria-item">
+                        <Categorias setSeccionActiva={setSeccionActiva} />
                     </li>
                     <li>
                         <a
@@ -129,6 +133,9 @@ function Menu({ setSeccionActiva }) {
                     >
                         Inicio
                     </a>
+                </li>
+                <li className="categoria-item">
+                    <Categorias setSeccionActiva={setSeccionActiva} />
                 </li>
                 <li>
                     <a

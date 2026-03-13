@@ -48,6 +48,17 @@
     color: gold;
 }
 
+/* categorias area */
+.categorias-header {
+    margin: 0 1rem;
+    /* position no longer needed globally; li parent will handle it */
+}
+
+/* cuando el menu esta dentro de la lista, necesitamos el contenedor relativo */
+.categoria-item {
+    position: relative;
+}
+
 /* REDES */
 .redes {
     display: flex;

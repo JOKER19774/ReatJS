@@ -4,15 +4,7 @@ import "./Login.css";
 
 function Login({ usuarios, setUsuarios }) {
   const { autenticado, usuarioActual, login, logout } = useAuth();
-  const [credenciales, setCredenciales] = useState(() => {
-    // leer de localStorage si existe
-    try {
-      const saved = localStorage.getItem("credenciales");
-      return saved ? JSON.parse(saved) : { usuario: "", password: "" };
-    } catch {
-      return { usuario: "", password: "" };
-    }
-  });
+  const [credenciales, setCredenciales] = useState({ usuario: "", password: "" });
   const [modo, setModo] = useState("login"); // "login" | "register" | "recover"
   const [registro, setRegistro] = useState({
     nombre: "",
@@ -23,13 +15,7 @@ function Login({ usuarios, setUsuarios }) {
   const [recuperarCorreo, setRecuperarCorreo] = useState("");
 
   const actualizarCampo = (campo, valor) => {
-    setCredenciales((actual) => {
-      const updated = { ...actual, [campo]: valor };
-      try {
-        localStorage.setItem("credenciales", JSON.stringify(updated));
-      } catch {}
-      return updated;
-    });
+    setCredenciales((actual) => ({ ...actual, [campo]: valor }));
   };
 
   const enviarLogin = (event) => {
@@ -119,6 +105,7 @@ function Login({ usuarios, setUsuarios }) {
             <input
               className="input-login"
               type="text"
+              autoComplete="username"
               placeholder="Username"
               value={credenciales.usuario}
               onChange={(event) => actualizarCampo("usuario", event.target.value)}
@@ -131,6 +118,7 @@ function Login({ usuarios, setUsuarios }) {
             <input
               className="input-login"
               type="password"
+              autoComplete="current-password"
               placeholder="Password"
               value={credenciales.password}
               onChange={(event) => actualizarCampo("password", event.target.value)}
