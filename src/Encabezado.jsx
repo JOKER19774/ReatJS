@@ -3,6 +3,8 @@ import youtube from "./assets/youtube.png";
 import facebook from "./assets/facebook.png";
 import instagram from "./assets/instagram.png";
 import "./Encabezado.css";
+import { useAuth } from "./AuthContext.jsx";
+import Categorias from "./Categorias.jsx";
 
 function Encabezado({ seccionActiva, setSeccionActiva }) {
     return (
@@ -22,18 +24,14 @@ function Logo() {
     );
 }
 
-import { useAuth } from "./AuthContext.jsx";
-import Categorias from "./Categorias.jsx";
-
 function Menu({ setSeccionActiva }) {
     const { autenticado, esDisenador, logout } = useAuth();
 
-    // si no está autenticado mostramos la mayoría de apartados, pero no enlace a Usuarios ni Carrito
     if (!autenticado) {
         return (
             <nav className="menu">
                 <ul>
-                        <li>
+                    <li>
                         <a
                             href="#Inicio"
                             onClick={(e) => {
@@ -69,7 +67,6 @@ function Menu({ setSeccionActiva }) {
                             Productos
                         </a>
                     </li>
-                    {/* no mostramos carrito hasta logear */}
                     <li>
                         <a
                             href="#"
@@ -119,7 +116,6 @@ function Menu({ setSeccionActiva }) {
         );
     }
 
-    // ya autenticado mostramos todos los apartados incluyendo Usuarios y Carrito
     return (
         <nav className="menu">
             <ul>
@@ -134,9 +130,11 @@ function Menu({ setSeccionActiva }) {
                         Inicio
                     </a>
                 </li>
-                <li className="categoria-item">
-                    <Categorias setSeccionActiva={setSeccionActiva} />
-                </li>
+                {esDisenador && (
+                    <li className="categoria-item">
+                        <Categorias setSeccionActiva={setSeccionActiva} />
+                    </li>
+                )}
                 <li>
                     <a
                         href="#"
@@ -170,39 +168,40 @@ function Menu({ setSeccionActiva }) {
                         Carrito
                     </a>
                 </li>
+                {esDisenador && (
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setSeccionActiva("usuarios");
+                            }}
+                        >
+                            Usuarios
+                        </a>
+                    </li>
+                )}
                 <li>
                     <a
                         href="#"
                         onClick={(e) => {
                             e.preventDefault();
-                            setSeccionActiva("usuarios");
+                            setSeccionActiva("login");
                         }}
                     >
-                        Usuarios
+                        Mi cuenta
                     </a>
                 </li>
                 <li>
-                    {autenticado ? (
-                        <button
-                            className="btn-cerrar-sesion"
-                            onClick={() => {
-                                logout();
-                                setSeccionActiva("inicio");
-                            }}
-                        >
-                            Cerrar sesión
-                        </button>
-                    ) : (
-                        <a
-                            href="#"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setSeccionActiva("login");
-                            }}
-                        >
-                            Iniciar sesión
-                        </a>
-                    )}
+                    <button
+                        className="btn-cerrar-sesion"
+                        onClick={() => {
+                            logout();
+                            setSeccionActiva("inicio");
+                        }}
+                    >
+                        Cerrar sesión
+                    </button>
                 </li>
                 <li>
                     <a
@@ -253,4 +252,3 @@ function Redes() {
 }
 
 export default Encabezado;
-

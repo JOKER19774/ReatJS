@@ -63,6 +63,34 @@
   width: 100%;
 }
 
+.campo-tipo-cuenta {
+  border: 1px solid #ff6666;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  padding: 12px;
+}
+
+.etiqueta-tipo-cuenta {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.opciones-tipo-cuenta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.opcion-tipo-cuenta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+}
+
 .icono-campo {
   position: absolute;
   left: 10px;

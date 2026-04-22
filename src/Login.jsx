@@ -11,6 +11,7 @@ function Login({ usuarios, setUsuarios }) {
     username: "",
     password: "",
     correo: "",
+    tipoCuenta: "usuario",
   });
   const [recuperarCorreo, setRecuperarCorreo] = useState("");
 
@@ -64,7 +65,7 @@ function Login({ usuarios, setUsuarios }) {
     const nuevoUsuario = {
       id: usuarios.length + 1,
       ...registro,
-      isDesigner: false,
+      isDesigner: registro.tipoCuenta === "disenador",
     };
     setUsuarios([...usuarios, nuevoUsuario]);
     login(nuevoUsuario);
@@ -195,6 +196,31 @@ function Login({ usuarios, setUsuarios }) {
               onChange={(e) => setRegistro({ ...registro, correo: e.target.value })}
               required
             />
+          </div>
+          <div className="campo-login campo-tipo-cuenta">
+            <span className="etiqueta-tipo-cuenta">Quiero registrarme como:</span>
+            <div className="opciones-tipo-cuenta">
+              <label className="opcion-tipo-cuenta">
+                <input
+                  type="radio"
+                  name="tipoCuenta"
+                  value="usuario"
+                  checked={registro.tipoCuenta === "usuario"}
+                  onChange={(e) => setRegistro({ ...registro, tipoCuenta: e.target.value })}
+                />
+                <span>Usuario</span>
+              </label>
+              <label className="opcion-tipo-cuenta">
+                <input
+                  type="radio"
+                  name="tipoCuenta"
+                  value="disenador"
+                  checked={registro.tipoCuenta === "disenador"}
+                  onChange={(e) => setRegistro({ ...registro, tipoCuenta: e.target.value })}
+                />
+                <span>Diseñador</span>
+              </label>
+            </div>
           </div>
           <div className="fila-opciones-login">
             <button

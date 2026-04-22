@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./Usuarios.css";
 
 const estadoInicialFormulario = {
@@ -9,15 +9,31 @@ const estadoInicialFormulario = {
   correo: "",
   username: "",
   password: "",
+  tipoCuenta: "usuario",
 };
 
 function Usuarios({ usuarios, setUsuarios }) {
   const [editandoId, setEditandoId] = useState(null);
   const [formulario, setFormulario] = useState(estadoInicialFormulario);
 
+  const resumen = useMemo(() => {
+    const totalDisenadores = usuarios.filter((usuario) => usuario.isDesigner).length;
+    const totalUsuarios = usuarios.length - totalDisenadores;
+    return { totalDisenadores, totalUsuarios };
+  }, [usuarios]);
+
   const iniciarEdicion = (usuario) => {
     setEditandoId(usuario.id);
-    setFormulario({ ...usuario });
+    setFormulario({
+      nombre: usuario.nombre || "",
+      apellidos: usuario.apellidos || "",
+      direccion: usuario.direccion || "",
+      telefono: usuario.telefono || "",
+      correo: usuario.correo || "",
+      username: usuario.username || "",
+      password: usuario.password || "",
+      tipoCuenta: usuario.isDesigner ? "disenador" : "usuario",
+    });
   };
 
   const cancelarEdicion = () => {
@@ -25,24 +41,62 @@ function Usuarios({ usuarios, setUsuarios }) {
     setFormulario(estadoInicialFormulario);
   };
 
-  const guardarEdicion = (event) => {
+  const actualizarCampo = (campo, valor) => {
+    setFormulario((actual) => ({ ...actual, [campo]: valor }));
+  };
+
+  const guardarUsuario = (event) => {
     event.preventDefault();
 
-    const camposCompletos = Object.values(formulario).every((valor) =>
-      typeof valor === "string" ? valor.trim() !== "" : true
+    const camposCompletos = Object.entries(formulario).every(([campo, valor]) =>
+      campo === "tipoCuenta" ? true : String(valor).trim() !== ""
     );
 
     if (!camposCompletos) {
-      window.alert("Completa todos los campos para editar el usuario.");
+      window.alert("Completa todos los campos del usuario.");
       return;
     }
 
-    setUsuarios((actual) =>
-      actual.map((usuario) =>
-        usuario.id === editandoId ? { ...usuario, ...formulario } : usuario
-      )
+    const usernameRepetido = usuarios.some(
+      (usuario) =>
+        usuario.username.toLowerCase() === formulario.username.trim().toLowerCase() &&
+        usuario.id !== editandoId
     );
-    window.alert("Cambios realizados con exito.");
+
+    if (usernameRepetido) {
+      window.alert("Ese nombre de usuario ya existe.");
+      return;
+    }
+
+    const usuarioNormalizado = {
+      nombre: formulario.nombre.trim(),
+      apellidos: formulario.apellidos.trim(),
+      direccion: formulario.direccion.trim(),
+      telefono: formulario.telefono.trim(),
+      correo: formulario.correo.trim(),
+      username: formulario.username.trim(),
+      password: formulario.password.trim(),
+      isDesigner: formulario.tipoCuenta === "disenador",
+    };
+
+    if (editandoId !== null) {
+      setUsuarios((actual) =>
+        actual.map((usuario) =>
+          usuario.id === editandoId ? { ...usuario, ...usuarioNormalizado } : usuario
+        )
+      );
+      window.alert("Usuario actualizado con exito.");
+    } else {
+      setUsuarios((actual) => [
+        ...actual,
+        {
+          id: actual.length ? Math.max(...actual.map((usuario) => usuario.id)) + 1 : 1,
+          ...usuarioNormalizado,
+        },
+      ]);
+      window.alert("Usuario agregado con exito.");
+    }
+
     cancelarEdicion();
   };
 
@@ -53,96 +107,128 @@ function Usuarios({ usuarios, setUsuarios }) {
     }
   };
 
-  const actualizarCampo = (campo, valor) => {
-    setFormulario((actual) => ({ ...actual, [campo]: valor }));
-  };
-
   return (
     <section className="usuarios">
-      <h2>Usuarios Registrados</h2>
+      <div className="usuarios-encabezado">
+        <div>
+          <p className="usuarios-kicker">Panel de usuarios</p>
+          <h2>Gestion de cuentas</h2>
+          <p className="usuarios-descripcion">
+            Desde aqui puedes registrar usuarios nuevos, editar cuentas existentes y administrar quien entra como usuario o como disenador.
+          </p>
+        </div>
+        <div className="usuarios-resumen">
+          <span>{usuarios.length} cuentas</span>
+          <span>{resumen.totalUsuarios} usuarios</span>
+          <span>{resumen.totalDisenadores} disenadores</span>
+        </div>
+      </div>
 
-      {editandoId !== null && (
-        <form className="form-editar-usuario" onSubmit={guardarEdicion}>
-          <h3>Registrar Usuarios</h3>
-          <div className="campos-formulario">
-            <label className="campo-edicion">
-              <span>Nombre de usuario</span>
-              <input
-                className="input-usuario"
-                type="text"
-                value={formulario.nombre}
-                onChange={(event) => actualizarCampo("nombre", event.target.value)}
-              />
-            </label>
-            <label className="campo-edicion">
-              <span>Apellidos</span>
-              <input
-                className="input-usuario"
-                type="text"
-                value={formulario.apellidos}
-                onChange={(event) => actualizarCampo("apellidos", event.target.value)}
-              />
-            </label>
-            <label className="campo-edicion">
-              <span>Direccion</span>
-              <input
-                className="input-usuario"
-                type="text"
-                value={formulario.direccion}
-                onChange={(event) => actualizarCampo("direccion", event.target.value)}
-              />
-            </label>
-            <label className="campo-edicion">
-              <span>Telefono</span>
-              <input
-                className="input-usuario"
-                type="text"
-                value={formulario.telefono}
-                onChange={(event) => actualizarCampo("telefono", event.target.value)}
-              />
-            </label>
-            <label className="campo-edicion">
-              <span>Correo</span>
-              <input
-                className="input-usuario"
-                type="email"
-                value={formulario.correo}
-                onChange={(event) => actualizarCampo("correo", event.target.value)}
-              />
-            </label>
-            <label className="campo-edicion">
-              <span>Usuario</span>
-              <input
-                className="input-usuario"
-                type="text"
-                value={formulario.username}
-                onChange={(event) => actualizarCampo("username", event.target.value)}
-              />
-            </label>
-            <label className="campo-edicion">
-              <span>Password</span>
-              <input
-                className="input-usuario"
-                type="text"
-                value={formulario.password}
-                onChange={(event) => actualizarCampo("password", event.target.value)}
-              />
-            </label>
+      <form className="form-editar-usuario" onSubmit={guardarUsuario}>
+        <h3>{editandoId !== null ? "Editar usuario" : "Registrar usuario"}</h3>
+        <div className="campos-formulario">
+          <label className="campo-edicion">
+            <span>Nombre</span>
+            <input
+              className="input-usuario"
+              type="text"
+              value={formulario.nombre}
+              onChange={(event) => actualizarCampo("nombre", event.target.value)}
+            />
+          </label>
+          <label className="campo-edicion">
+            <span>Apellidos</span>
+            <input
+              className="input-usuario"
+              type="text"
+              value={formulario.apellidos}
+              onChange={(event) => actualizarCampo("apellidos", event.target.value)}
+            />
+          </label>
+          <label className="campo-edicion">
+            <span>Direccion</span>
+            <input
+              className="input-usuario"
+              type="text"
+              value={formulario.direccion}
+              onChange={(event) => actualizarCampo("direccion", event.target.value)}
+            />
+          </label>
+          <label className="campo-edicion">
+            <span>Telefono</span>
+            <input
+              className="input-usuario"
+              type="text"
+              value={formulario.telefono}
+              onChange={(event) => actualizarCampo("telefono", event.target.value)}
+            />
+          </label>
+          <label className="campo-edicion">
+            <span>Correo</span>
+            <input
+              className="input-usuario"
+              type="email"
+              value={formulario.correo}
+              onChange={(event) => actualizarCampo("correo", event.target.value)}
+            />
+          </label>
+          <label className="campo-edicion">
+            <span>Username</span>
+            <input
+              className="input-usuario"
+              type="text"
+              value={formulario.username}
+              onChange={(event) => actualizarCampo("username", event.target.value)}
+            />
+          </label>
+          <label className="campo-edicion">
+            <span>Password</span>
+            <input
+              className="input-usuario"
+              type="text"
+              value={formulario.password}
+              onChange={(event) => actualizarCampo("password", event.target.value)}
+            />
+          </label>
+          <div className="campo-edicion campo-edicion-completo">
+            <span>Tipo de cuenta</span>
+            <div className="opciones-tipo-usuario">
+              <label className="opcion-tipo-usuario">
+                <input
+                  type="radio"
+                  name="tipoCuentaUsuario"
+                  value="usuario"
+                  checked={formulario.tipoCuenta === "usuario"}
+                  onChange={(event) => actualizarCampo("tipoCuenta", event.target.value)}
+                />
+                <span>Usuario</span>
+              </label>
+              <label className="opcion-tipo-usuario">
+                <input
+                  type="radio"
+                  name="tipoCuentaUsuario"
+                  value="disenador"
+                  checked={formulario.tipoCuenta === "disenador"}
+                  onChange={(event) => actualizarCampo("tipoCuenta", event.target.value)}
+                />
+                <span>Disenador</span>
+              </label>
+            </div>
           </div>
-          <div className="acciones-edicion-formulario">
-            <button className="btn-editar btn-guardar btn-principal" type="submit">
-              Registrar
-            </button>
-            <button
-              className="btn-editar btn-cancelar"
-              type="button"
-              onClick={cancelarEdicion}
-            >
-              Cancelar
-            </button>
-          </div>
-        </form>
-      )}
+        </div>
+        <div className="acciones-edicion-formulario">
+          <button className="btn-editar btn-guardar btn-principal" type="submit">
+            {editandoId !== null ? "Guardar cambios" : "Agregar usuario"}
+          </button>
+          <button
+            className="btn-editar btn-cancelar btn-principal"
+            type="button"
+            onClick={cancelarEdicion}
+          >
+            Cancelar
+          </button>
+        </div>
+      </form>
 
       <div className="tabla-wrapper">
         <table className="tabla-usuarios">
@@ -154,7 +240,7 @@ function Usuarios({ usuarios, setUsuarios }) {
               <th>Telefono</th>
               <th>Correo</th>
               <th>Username</th>
-              <th>Password</th>
+              <th>Tipo</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
@@ -168,7 +254,7 @@ function Usuarios({ usuarios, setUsuarios }) {
                 <td>{usuario.telefono}</td>
                 <td>{usuario.correo}</td>
                 <td>{usuario.username}</td>
-                <td>{usuario.password}</td>
+                <td>{usuario.isDesigner ? "Disenador" : "Usuario"}</td>
                 <td>
                   <button
                     className="btn-editar"

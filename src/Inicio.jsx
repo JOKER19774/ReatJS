@@ -25,9 +25,11 @@ const Inicio = ({
 }) => {
   const { autenticado, esDisenador } = useAuth();
   const seccionesProtegidas = ["productos", "carrito", "usuarios"];
+  const seccionesSoloDisenador = ["usuarios"];
   const intentandoSeccionProtegida = seccionesProtegidas.includes(seccionActiva);
   const mostrarApartadoNoLogeado = intentandoSeccionProtegida && !autenticado;
-  const intentoUsuariosNoDesigner = seccionActiva === "usuarios" && autenticado && !esDisenador;
+  const intentoUsuariosNoDesigner =
+    seccionesSoloDisenador.includes(seccionActiva) && autenticado && !esDisenador;
 
   return (
     <div className="inicio-container">
@@ -56,7 +58,7 @@ const Inicio = ({
           <NieblaNegra>
             <section className="apartado-no-logeado">
               <h2>Acceso restringido</h2>
-              <p>Solo los diseñadores pueden ver y editar la lista de usuarios.</p>
+              <p>Solo los disenadores pueden ver y administrar la seccion de Usuarios.</p>
             </section>
           </NieblaNegra>
         )}
